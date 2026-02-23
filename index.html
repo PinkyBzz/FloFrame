@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FloFrame — Photobooth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ff-red: #ff5959;
+      --ff-yellow: #ffde61;
+      --ff-orange: #ffa23a;
+      --ff-blue: #4875da;
+      --ff-bg: #fffdf6;
+      --ff-text: #2f3767;
+      --ff-muted: #6673a0;
+      --ff-font-main: 'Poppins', sans-serif;
+      --ff-font-script: 'Kalam', cursive;
+    }
+
+    body {
+      font-family: var(--ff-font-main);
+      background: radial-gradient(circle at 10% -10%, #ffffff 0%, var(--ff-bg) 50%, #f8f4e8 100%);
+      color: var(--ff-text);
+    }
+
+    h1, h2, h3, button {
+      font-family: var(--ff-font-main);
+    }
+
+    .font-script {
+      font-family: var(--ff-font-script);
+      letter-spacing: 0.01em;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .section.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hidden-canvas {
+      display: none;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 1rem;
+      width: 1rem;
+      border-radius: 9999px;
+      background: var(--ff-blue);
+      cursor: pointer;
+      margin-top: -0.375rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 0.25rem;
+      cursor: pointer;
+      background: #d9e2fb;
+      border-radius: 9999px;
+    }
+
+    input[type=range]:focus {
+      outline: none;
+    }
+
+    .template-card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 2px solid #e8edf7;
+      box-shadow: 0 2px 10px rgba(20, 35, 75, 0.06);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .template-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(20, 35, 75, 0.12);
+    }
+
+    .template-card.selected {
+      border-color: var(--ff-blue);
+      box-shadow: 0 0 0 3px rgba(72, 117, 218, 0.16);
+    }
+
+    .template-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .template-label {
+      font-size: 0.75rem;
+      color: var(--ff-muted);
+      padding: 0.4rem 0.5rem;
+      text-align: center;
+      border-top: 1px solid #eef2f9;
+      background: #fafcff;
+      font-weight: 600;
+    }
+
+    .preview-slot.filled {
+      border-color: var(--ff-blue) !important;
+      color: var(--ff-blue) !important;
+    }
+
+    .preview-slot.filled img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .adjust-card {
+      background: #fbfdff;
+      border: 1px solid #e5edf8;
+      border-radius: 1rem;
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .adjust-card .thumb-wrapper {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      background: #eff4fb;
+    }
+
+    .adjust-card .thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
+
+    .cal-item {
+      background: #fafcff;
+      border: 1px solid #e6edf7;
+      border-radius: 0.75rem;
+      padding: 0.65rem;
+    }
+
+    .cal-val,
+    .zoom-value {
+      font-size: 0.7rem;
+      color: var(--ff-muted);
+      margin-top: 0.2rem;
+    }
+
+    #btnStart,
+    #btnCapture,
+    #btnGenerate {
+      background: var(--ff-blue) !important;
+      box-shadow: 0 8px 24px rgba(72, 117, 218, 0.28) !important;
+    }
+
+    #btnStart:hover,
+    #btnCapture:hover,
+    #btnGenerate:hover {
+      background: #3f66c3 !important;
+    }
+
+    .theme-soft {
+      background: #edf2ff !important;
+      color: var(--ff-blue) !important;
+      border-color: #cfdbff !important;
+    }
+
+    .theme-warm {
+      background: #fff4d4 !important;
+      color: #cc7d22 !important;
+      border-color: #ffe2a6 !important;
+    }
+
+    .theme-danger {
+      background: #fff0f0 !important;
+      color: #d54545 !important;
+      border-color: #ffd1d1 !important;
+    }
+
+    .hero-palette-top {
+      border-top: 6px solid var(--ff-blue);
+    }
+
+    .hero-title-accent {
+      color: var(--ff-blue);
+    }
+
+    .capture-status-pill {
+      border-color: #d9e2fb !important;
+      color: #4f5f95 !important;
+      background: #f3f7ff !important;
+    }
+
+    .badge-yellow {
+      background: #fff8da !important;
+      color: #9e7a16 !important;
+      border-color: #ffe89f !important;
+    }
+
+    .badge-orange {
+      background: #fff2e5 !important;
+      color: #bd6f1f !important;
+      border-color: #ffd6ad !important;
+    }
+
+    .badge-red {
+      background: #fff0f0 !important;
+      color: #cf4a4a !important;
+      border-color: #ffd0d0 !important;
+    }
+  </style>
+</head>
+<body class="text-slate-900 antialiased min-h-screen selection:bg-yellow-200 overflow-x-hidden">
+
+  <!-- ======================== -->
+  <!-- SECTION 1: LANDING       -->
+  <!-- ======================== -->
+  <section id="landing" class="section active flex-1">
+    <div class="max-w-5xl mx-auto px-4 py-12 sm:py-24 w-full flex flex-col gap-16">
+
+      <header class="hero-palette-top bg-white rounded-[2.5rem] p-8 sm:p-12 shadow-[0_8px_40px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col md:flex-row gap-12 items-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+
+        <div class="w-full md:w-1/2 flex flex-col z-10">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="flex items-center justify-center w-10 h-10 text-white rounded-xl font-semibold tracking-tighter text-lg shadow-sm" style="background: var(--ff-blue)">
+              FF
+            </div>
+            <span class="text-xs font-medium theme-soft py-1.5 px-3 rounded-full border font-script">Digital Photobooth</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl font-semibold tracking-tighter text-slate-900 leading-[1.1] mb-5">
+            Build your photostrip in under a minute.
+          </h1>
+          <p class="text-sm sm:text-base text-slate-500 leading-relaxed mb-8 max-w-md">
+            Pilih template, ambil 3 foto, atur framing, lalu download hasil PNG berkualitas langsung dari browser.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <button id="btnStart" class="text-white px-7 py-3.5 rounded-full text-sm font-medium transition-all active:scale-95 flex items-center gap-2 shadow-md">
+              Start Photobooth
+              <iconify-icon icon="solar:arrow-right-linear" width="1.2em" height="1.2em"></iconify-icon>
+            </button>
+          </div>
+
+          <div class="flex flex-wrap gap-x-6 gap-y-3 mt-10 text-xs text-slate-500 font-medium">
+            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:server-linear"></iconify-icon> Static Hosting Ready</span>
+            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:smartphone-linear"></iconify-icon> Mobile First</span>
+            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:cloud-download-linear"></iconify-icon> No App Install</span>
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/2 relative z-10">
+          <div class="aspect-[4/5] bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-sm relative group">
+            <img src="assets/Poster.png" alt="FloFrame showcase" class="w-full h-full object-cover text-xs text-slate-400 flex items-center justify-center text-center bg-slate-100 transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-3xl"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-10 h-10 theme-soft rounded-xl flex items-center justify-center mb-2">
+            <iconify-icon icon="solar:gallery-linear" width="1.5em" height="1.5em"></iconify-icon>
+          </div>
+          <h3 class="text-base font-semibold tracking-tight text-slate-900">Template Based</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Gunakan berbagai template photostrip dengan style berbeda untuk setiap mood.</p>
+        </article>
+
+        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-10 h-10 badge-yellow rounded-xl flex items-center justify-center mb-2">
+            <iconify-icon icon="solar:camera-minimalistic-linear" width="1.5em" height="1.5em"></iconify-icon>
+          </div>
+          <h3 class="text-base font-semibold tracking-tight text-slate-900">Smart Capture</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Countdown otomatis dan alur 3 foto membuat proses pengambilan lebih konsisten.</p>
+        </article>
+
+        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-10 h-10 badge-orange rounded-xl flex items-center justify-center mb-2">
+            <iconify-icon icon="solar:bolt-linear" width="1.5em" height="1.5em"></iconify-icon>
+          </div>
+          <h3 class="text-base font-semibold tracking-tight text-slate-900">Instant Output</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Generate, download, lalu lanjut kirim via WhatsApp dalam satu alur sederhana.</p>
+        </article>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 col-span-1 md:col-span-2">
+          <div class="px-2 pt-2 flex items-center gap-2">
+            <h3 class="text-sm font-semibold tracking-tight text-slate-900">Product Preview</h3>
+          </div>
+          <div class="w-full aspect-video bg-slate-100 rounded-2xl overflow-hidden relative">
+            <video controls class="w-full h-full object-cover" preload="metadata">
+              <source src="assets/konten.mp4" type="video/mp4" />
+              <div class="absolute inset-0 flex items-center justify-center text-xs text-slate-400">Video preview not available</div>
+            </video>
+          </div>
+        </article>
+
+        <div class="flex flex-col gap-6">
+          <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 flex-1">
+            <div class="px-2 pt-2">
+              <h3 class="text-sm font-semibold tracking-tight text-slate-900">Brand Asset</h3>
+            </div>
+            <div class="w-full flex-1 bg-slate-50 rounded-2xl overflow-hidden min-h-[120px] flex items-center justify-center">
+              <img src="assets/logo.png" alt="FloFrame logo" class="w-1/2 h-auto object-contain" />
+            </div>
+          </article>
+
+          <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 flex-1">
+            <div class="px-2 pt-2">
+              <h3 class="text-sm font-semibold tracking-tight text-slate-900">Brand Canvas</h3>
+            </div>
+            <div class="w-full flex-1 bg-slate-50 rounded-2xl overflow-hidden min-h-[120px]">
+              <img src="assets/BMC%20.png" alt="FloFrame BMC" class="w-full h-full object-cover text-xs text-transparent" />
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ======================== -->
+  <!-- SECTION 2: TEMPLATE SEL  -->
+  <!-- ======================== -->
+  <section id="templateSelection" class="section flex-1">
+    <div class="max-w-4xl mx-auto px-4 py-16 sm:py-24 w-full flex flex-col gap-10">
+      <div class="text-center flex flex-col items-center gap-3">
+        <div class="w-12 h-12 theme-soft rounded-2xl flex items-center justify-center mb-2">
+          <iconify-icon icon="solar:widget-3-linear" width="1.5em" height="1.5em"></iconify-icon>
+        </div>
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-900">Choose Template</h2>
+        <p class="text-sm text-slate-500 max-w-sm">Pilih satu template desain untuk memulai sesi photostrip Anda.</p>
+      </div>
+
+      <div id="templateGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Templates injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== -->
+  <!-- SECTION 3: PHOTOBOOTH    -->
+  <!-- ======================== -->
+  <section id="photobooth" class="section flex-1">
+    <div class="max-w-3xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
+
+      <div class="text-center">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Photobooth Capture</h2>
+        <p class="text-sm text-slate-500 mt-2">Posisikan diri Anda, ambil 3 foto beruntun.</p>
+      </div>
+
+      <div class="bg-white p-4 sm:p-6 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col gap-8">
+
+        <div class="relative w-full aspect-[3/4] sm:aspect-[4/3] bg-slate-900 rounded-[1.5rem] overflow-hidden shadow-inner flex items-center justify-center group">
+          <video id="cameraFeed" class="w-full h-full object-cover -scale-x-100" autoplay playsinline></video>
+
+          <div id="countdown" class="countdown hidden absolute inset-0 flex items-center justify-center text-7xl font-semibold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] z-10"></div>
+
+          <div id="flash" class="flash hidden absolute inset-0 bg-white z-20 transition-opacity duration-75"></div>
+
+          <div class="absolute inset-8 border border-white/20 rounded-xl pointer-events-none z-0"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none z-0 flex items-center justify-center">
+            <iconify-icon icon="solar:target-linear"></iconify-icon>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-2">
+          <div class="flex flex-col items-center sm:items-start gap-4 flex-1">
+            <p id="captureStatus" class="capture-status-pill text-xs font-medium px-3 py-1.5 rounded-full border text-center sm:text-left">Ready to capture 3 photos</p>
+            <button id="btnCapture" class="text-white px-8 py-4 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+              <iconify-icon icon="solar:camera-minimalistic-linear" width="1.4em" height="1.4em"></iconify-icon>
+              Start Capture
+            </button>
+          </div>
+
+          <div id="previewRow" class="flex gap-3 justify-center">
+            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev0"><span>1</span></div>
+            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev1"><span>2</span></div>
+            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev2"><span>3</span></div>
+          </div>
+
+        </div>
+
+        <button id="btnProceed" class="hidden w-full bg-slate-900 text-white px-6 py-4 rounded-2xl text-sm font-medium hover:bg-slate-800 transition-all items-center justify-center gap-2 mt-2">
+          Continue to Adjust
+          <iconify-icon icon="solar:arrow-right-linear" width="1.2em" height="1.2em"></iconify-icon>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== -->
+  <!-- SECTION 4: ADJUST PHOTOS -->
+  <!-- ======================== -->
+  <section id="adjustSection" class="section flex-1">
+    <div class="max-w-5xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
+
+      <div class="text-center">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Fine Tune & Calibrate</h2>
+        <p class="text-sm text-slate-500 mt-2">Atur zoom dan posisi agar hasil photostrip presisi.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <div class="bg-white p-5 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col gap-4 h-full">
+              <h3 class="text-sm font-semibold tracking-tight flex items-center gap-2">
+                <iconify-icon icon="solar:tuning-square-2-linear" style="color: var(--ff-blue)"></iconify-icon>
+              Photo Adjustments
+            </h3>
+
+            <div id="adjustCards" class="flex flex-col gap-4 overflow-y-auto pr-2">
+              <!-- JS inserts cards here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          <div class="bg-white p-5 sm:p-8 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col gap-6">
+
+            <div>
+              <h3 class="text-base font-semibold tracking-tight text-slate-900 flex items-center gap-2">
+                <iconify-icon icon="solar:ruler-pen-linear" style="color: var(--ff-orange)"></iconify-icon>
+                Slot Calibration
+              </h3>
+              <p class="text-xs text-slate-500 mt-1">Geser nilai sampai foto pas di dalam frame template.</p>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center border border-slate-100 min-h-[300px] relative">
+              <canvas id="adjustPreviewCanvas" class="max-w-full h-auto max-h-[50vh] shadow-sm rounded-md bg-white"></canvas>
+            </div>
+
+            <div id="calibrationControls" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Slider controls injected by JS -->
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100">
+              <button id="btnCalibrateClick" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-800 transition-colors flex items-center gap-1.5" type="button">
+                <iconify-icon icon="solar:mouse-minimalistic-linear"></iconify-icon> Calibrate by Click
+              </button>
+              <button id="btnResetTemplateSlot" class="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition-colors" type="button">
+                Reset Template
+              </button>
+              <button id="btnCopySlotConfig" class="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition-colors flex items-center gap-1.5 ml-auto" type="button">
+                <iconify-icon icon="solar:copy-linear"></iconify-icon> JSON
+              </button>
+            </div>
+
+            <p id="calibrationHint" class="text-[10px] sm:text-xs text-slate-500 bg-blue-50/60 p-3 rounded-xl border border-blue-100/70 flex items-start gap-2">
+              <iconify-icon icon="solar:info-circle-linear" class="mt-0.5 shrink-0" style="color: var(--ff-blue)"></iconify-icon>
+              <span>Tip: klik "Calibrate by Click" lalu tandai kiri-atas dan kanan-bawah untuk tiap slot di atas canvas.</span>
+            </p>
+
+          </div>
+
+          <button id="btnGenerate" class="w-full text-white py-4 rounded-2xl text-sm font-semibold hover:-translate-y-0.5 transition-all flex justify-center items-center gap-2 mt-2">
+            Generate Photostrip
+            <iconify-icon icon="solar:magic-stick-3-linear" width="1.2em" height="1.2em"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== -->
+  <!-- SECTION 5: RESULT        -->
+  <!-- ======================== -->
+  <section id="resultSection" class="section flex-1">
+    <div class="max-w-md mx-auto px-4 py-16 sm:py-20 w-full flex flex-col gap-8">
+
+      <div class="text-center">
+        <div class="w-12 h-12 badge-red rounded-full flex items-center justify-center mx-auto mb-4">
+          <iconify-icon icon="solar:check-read-linear" width="1.5em" height="1.5em"></iconify-icon>
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Final Photostrip</h2>
+        <p class="text-sm text-slate-500 mt-2">Download hasil atau lanjut chat WhatsApp.</p>
+      </div>
+
+      <div class="bg-white p-4 sm:p-5 rounded-[2rem] shadow-md border border-slate-100 flex flex-col items-center gap-6">
+
+        <div class="w-full bg-slate-50 rounded-2xl p-4 flex justify-center items-center border border-slate-100">
+          <canvas id="resultCanvas" class="max-w-full h-auto max-h-[50vh] drop-shadow-sm"></canvas>
+        </div>
+
+        <div class="w-full flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="userName" class="text-xs font-medium text-slate-500 ml-1">Your Name</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <iconify-icon icon="solar:user-linear"></iconify-icon>
+              </div>
+              <input type="text" id="userName" placeholder="Enter your name..." class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+            <button id="btnDownload" class="bg-slate-900 text-white px-4 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-sm">
+              <iconify-icon icon="solar:download-minimalistic-linear" width="1.2em" height="1.2em"></iconify-icon>
+              Download
+            </button>
+            <button id="btnWhatsApp" class="bg-[#25D366] text-white px-4 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(37,211,102,0.25)] hover:bg-[#20bd5a] transition-colors">
+              <iconify-icon icon="solar:phone-calling-linear" width="1.2em" height="1.2em"></iconify-icon>
+              WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <button id="btnRestart" class="text-sm text-slate-400 font-medium hover:text-slate-900 transition-colors py-2 flex items-center justify-center gap-2 mt-4 w-fit mx-auto">
+        <iconify-icon icon="solar:restart-linear"></iconify-icon>
+        Start Over
+      </button>
+
+    </div>
+  </section>
+
+  <canvas id="captureCanvas" class="hidden-canvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
