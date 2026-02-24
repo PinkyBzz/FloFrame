@@ -181,14 +181,39 @@ const $captureCanvas    = document.getElementById('captureCanvas');
 // ============================================
 
 /**
- * Show a specific section and hide all others.
+ * Show a specific section and hide all others with a smooth transition.
  * @param {HTMLElement} section - The section element to show.
  */
 function showSection(section) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  section.classList.add('active');
-  // Scroll to top of the page when switching sections
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const currentActive = document.querySelector('.section.active');
+  
+  if (currentActive) {
+    // Fade out current section
+    currentActive.style.opacity = '0';
+    currentActive.style.transform = 'translateY(-15px)';
+    
+    setTimeout(() => {
+      currentActive.classList.remove('active');
+      currentActive.style.transform = ''; // Reset transform for next time
+      
+      // Show new section
+      section.classList.add('active');
+      // Small delay to allow display:flex to apply before animating opacity
+      setTimeout(() => {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+      }, 50);
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 400); // Match the CSS transition duration
+  } else {
+    // Initial load (no active section yet)
+    section.classList.add('active');
+    setTimeout(() => {
+      section.style.opacity = '1';
+      section.style.transform = 'translateY(0)';
+    }, 50);
+  }
 }
 
 function getTemplateFileName() {

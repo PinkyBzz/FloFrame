@@ -39,17 +39,16 @@
 
     .section {
       display: none;
-      animation: fadeIn 0.4s ease-out forwards;
+      opacity: 0;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      transform: translateY(15px);
     }
 
     .section.active {
       display: flex;
       flex-direction: column;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .hidden {
