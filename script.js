@@ -14,10 +14,28 @@
  */
 const TEMPLATES = [
   { name: 'Frame 01 (Transparent)', src: 'templates/frame1.png' },
+  { name: 'Frame 02 (Transparent)', src: 'templates/frame2.png' },
+  { name: 'Frame 03 (Transparent)', src: 'templates/frame3.png' },
+  { name: 'Frame 04 (Transparent)', src: 'templates/frame4.png' },
+  { name: 'Frame 05 (Transparent)', src: 'templates/frame5.png' },
+  { name: 'Frame 06 (Transparent)', src: 'templates/frame6.png' },
+  { name: 'Frame 07 (Transparent)', src: 'templates/frame7.png' },
+  { name: 'Frame 08 (Transparent)', src: 'templates/frame8.png' },
+  { name: 'Frame 09 (Transparent)', src: 'templates/frame9.png' },
+  { name: 'Frame 10 (Transparent)', src: 'templates/frame10.png' },
 ];
 
 const TEMPLATE_TRANSPARENCY_HINTS = {
   'frame1.png': true,
+  'frame2.png': true,
+  'frame3.png': true,
+  'frame4.png': true,
+  'frame5.png': true,
+  'frame6.png': true,
+  'frame7.png': true,
+  'frame8.png': true,
+  'frame9.png': true,
+  'frame10.png': true,
 };
 
 /**
@@ -32,61 +50,61 @@ const TEMPLATE_TRANSPARENCY_HINTS = {
  * the top-left corner (x, y) and the width/height (w, h).
  */
 let slotConfig = [
-  { x: 72, y: 214, w: 456, h: 288 },  // top slot
-  { x: 72, y: 600, w: 456, h: 288 },  // middle slot
-  { x: 72, y: 986, w: 456, h: 288 },  // bottom slot
+  { x: 44, y: 0, w: 240, h: 230, tilt: 0 },
+  { x: 38, y: 237, w: 240, h: 188, tilt: 0 },
+  { x: 38, y: 459, w: 240, h: 200, tilt: 0 }
 ];
 
 const TEMPLATE_SLOT_PRESETS = {
-  '2_20260221_214737_0000.png': [
-    { x: 109, y: 98, w: 362, h: 385 },
-    { x: 109, y: 507, w: 362, h: 355 },
-    { x: 109, y: 1228, w: 362, h: 157 },
+  'frame1.png': [
+    { x: 44, y: 0, w: 240, h: 230, tilt: 0 },
+    { x: 38, y: 237, w: 240, h: 188, tilt: 0 },
+    { x: 38, y: 459, w: 240, h: 200, tilt: 0 }
   ],
-  '3_20260221_214737_0001.png': [
-    { x: 91, y: 96, w: 415, h: 345 },
-    { x: 91, y: 465, w: 415, h: 358 },
-    { x: 91, y: 1040, w: 415, h: 261 },
+  'frame2.png': [
+    { x: 0, y: 81, w: 600, h: 377, tilt: 0 },
+    { x: 72, y: 464, w: 445, h: 357, tilt: 0 },
+    { x: 72, y: 832, w: 484, h: 398, tilt: 0 }
   ],
-  '6_20260221_214737_0002.png': [
-    { x: 100, y: 218, w: 388, h: 226 },
-    { x: 100, y: 644, w: 388, h: 221 },
-    { x: 100, y: 1097, w: 388, h: 224 },
+  'frame3.png': [
+    { x: 27, y: 186, w: 456, h: 285, tilt: -17 },
+    { x: 72, y: 589, w: 456, h: 335, tilt: 20 },
+    { x: 72, y: 1048, w: 456, h: 292, tilt: 0 }
   ],
-  '7_20260221_214737_0003.png': [
-    { x: 40, y: 102, w: 512, h: 388 },
-    { x: 40, y: 564, w: 512, h: 390 },
-    { x: 40, y: 978, w: 512, h: 402 },
+  'frame4.png': [
+    { x: 92, y: 60, w: 456, h: 433, tilt: 0 },
+    { x: 96, y: 499, w: 456, h: 460, tilt: 0 },
+    { x: 72, y: 940, w: 456, h: 504, tilt: 0 }
   ],
-  '9_20260221_214737_0004.png': [
-    { x: 56, y: 175, w: 488, h: 417 },
-    { x: 56, y: 616, w: 488, h: 320 },
-    { x: 56, y: 1072, w: 488, h: 319 },
+  'frame5.png': [
+    { x: 67, y: 218, w: 533, h: 398, tilt: 0 },
+    { x: 50, y: 608, w: 550, h: 424, tilt: 0 },
+    { x: 33, y: 1030, w: 567, h: 363, tilt: 0 }
   ],
-  '11_20260221_214737_0005.png': [
-    { x: 71, y: 264, w: 449, h: 247 },
-    { x: 71, y: 535, w: 449, h: 349 },
-    { x: 71, y: 908, w: 449, h: 385 },
+  'frame6.png': [
+    { x: 72, y: 257, w: 456, h: 285, tilt: 0 },
+    { x: 72, y: 608, w: 456, h: 285, tilt: 0 },
+    { x: 72, y: 1012, w: 456, h: 285, tilt: 0 }
   ],
-  '13_20260221_214737_0006.png': [
-    { x: 96, y: 200, w: 422, h: 261 },
-    { x: 96, y: 772, w: 422, h: 202 },
-    { x: 96, y: 1094, w: 422, h: 222 },
+  'frame7.png': [
+    { x: 72, y: 78, w: 456, h: 309, tilt: 0 },
+    { x: 72, y: 463, w: 456, h: 300, tilt: 0 },
+    { x: 72, y: 868, w: 456, h: 292, tilt: 0 }
   ],
-  '15_20260221_214737_0007.png': [
-    { x: 38, y: 234, w: 506, h: 269 },
-    { x: 38, y: 527, w: 506, h: 300 },
-    { x: 38, y: 985, w: 506, h: 293 },
+  'frame8.png': [
+    { x: 72, y: 239, w: 456, h: 285, tilt: 0 },
+    { x: 72, y: 625, w: 456, h: 285, tilt: 0 },
+    { x: 72, y: 998, w: 456, h: 285, tilt: 0 }
   ],
-  '17_20260221_214737_0008.png': [
-    { x: 74, y: 200, w: 449, h: 261 },
-    { x: 74, y: 620, w: 449, h: 261 },
-    { x: 74, y: 1252, w: 449, h: 167 },
+  'frame9.png': [
+    { x: 42, y: 60, w: 498, h: 363, tilt: 0 },
+    { x: 29, y: 481, w: 571, h: 335, tilt: 0 },
+    { x: 56, y: 814, w: 498, h: 363, tilt: 0 }
   ],
-  '19_20260221_214737_0009.png': [
-    { x: 43, y: 188, w: 505, h: 386 },
-    { x: 43, y: 598, w: 505, h: 270 },
-    { x: 43, y: 892, w: 505, h: 379 },
+  'frame10.png': [
+    { x: 85, y: 218, w: 456, h: 309, tilt: 0 },
+    { x: 72, y: 608, w: 456, h: 285, tilt: 0 },
+    { x: 121, y: 1030, w: 456, h: 327, tilt: 0 }
   ],
 };
 
@@ -96,7 +114,7 @@ const SLOT_CONFIG_STORAGE_KEY = 'floframe-slot-config-v1';
  * WhatsApp target phone number (with country code, no + sign).
  * Example: '6281234567890' for Indonesia +62-812-3456-7890
  */
-const WA_PHONE_NUMBER = '6281234567890';
+const WA_PHONE_NUMBER = '6289604359299';
 
 /**
  * Number of photos to capture.
@@ -115,16 +133,15 @@ const COUNTDOWN_SECONDS = 3;
 
 let selectedTemplate = null;   // { name, src, resolvedSrc? }
 let cameraStream = null;       // MediaStream
+let currentFacingMode = 'user'; // 'user' (front) or 'environment' (back)
 let capturedPhotos = [];       // Array of HTMLImageElement (data URLs)
 let zoomValues = [1, 1, 1];   // Scale value for each photo slot
+let globalFilter = 'none';     // Global photo filter (none, grayscale, sepia)
 let templateImageCache = null;
 const templateTransparencyCache = {};
 let slotConfigDetected = false;
 const slotConfigCacheByTemplate = {};
 let slotConfigStorage = loadSlotConfigStorage();
-let isClickCalibrating = false;
-let clickCalibrationStep = 0;
-let clickStartPoint = null;
 
 
 // ============================================
@@ -147,9 +164,7 @@ const $btnCapture       = document.getElementById('btnCapture');
 const $btnProceed       = document.getElementById('btnProceed');
 const $adjustCards      = document.getElementById('adjustCards');
 const $calibrationControls = document.getElementById('calibrationControls');
-const $btnCalibrateClick = document.getElementById('btnCalibrateClick');
 const $btnResetTemplateSlot = document.getElementById('btnResetTemplateSlot');
-const $btnCopySlotConfig = document.getElementById('btnCopySlotConfig');
 const $calibrationHint = document.getElementById('calibrationHint');
 const $adjustPreviewCanvas = document.getElementById('adjustPreviewCanvas');
 const $btnGenerate      = document.getElementById('btnGenerate');
@@ -267,21 +282,23 @@ function renderTemplates() {
  * Initialize camera using getUserMedia.
  * Requests rear-facing camera on mobile, any camera on desktop.
  */
-async function initCamera() {
+async function initCamera(keepState = false) {
   try {
-    // Reset state for new session
-    capturedPhotos = [];
-    zoomValues = [1, 1, 1];
-    resetPreviewSlots();
-    $btnCapture.disabled = false;
-    $btnCapture.textContent = 'Start Capture';
-    $btnProceed.classList.add('hidden');
-    $captureStatus.textContent = 'Press the button to start capturing 3 photos.';
+    if (!keepState) {
+      // Reset state for new session
+      capturedPhotos = [];
+      zoomValues = [1, 1, 1];
+      resetPreviewSlots();
+      $btnCapture.disabled = false;
+      $btnCapture.textContent = 'Start Capture';
+      $btnProceed.classList.add('hidden');
+      $captureStatus.textContent = 'Press the button to start capturing 3 photos.';
+    }
 
     // Request camera access
     cameraStream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: 'user',
+        facingMode: currentFacingMode,
         width: { ideal: 1280 },
         height: { ideal: 960 },
       },
@@ -289,6 +306,14 @@ async function initCamera() {
     });
 
     $cameraFeed.srcObject = cameraStream;
+    
+    // Mirror the video feed only if using the front camera
+    if (currentFacingMode === 'user') {
+      $cameraFeed.style.transform = 'scaleX(-1)';
+    } else {
+      $cameraFeed.style.transform = 'scaleX(1)';
+    }
+    
     await $cameraFeed.play();
   } catch (err) {
     console.error('Camera access error:', err);
@@ -324,6 +349,20 @@ function resetPreviewSlots() {
 // SECTION 3: PHOTOBOOTH — CAPTURE FLOW
 // ============================================
 
+const $btnSwitchCamera = document.getElementById('btnSwitchCamera');
+if ($btnSwitchCamera) {
+  $btnSwitchCamera.addEventListener('click', async () => {
+    // Toggle facing mode
+    currentFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
+    
+    // Stop current stream
+    stopCamera();
+    
+    // Re-initialize with new facing mode, keeping current state (photos, etc)
+    await initCamera(true);
+  });
+}
+
 $btnCapture.addEventListener('click', () => {
   startCapture();
 });
@@ -339,7 +378,7 @@ async function startCapture() {
 
   // If camera was stopped (e.g. after previous capture), re-initialize first.
   if (!cameraStream || !$cameraFeed.srcObject) {
-    await initCamera();
+    await initCamera(true);
   }
 
   if (!$cameraFeed.srcObject) {
@@ -357,8 +396,19 @@ async function startCapture() {
   for (let i = 0; i < TOTAL_PHOTOS; i++) {
     $captureStatus.textContent = `Get ready for photo ${i + 1} of ${TOTAL_PHOTOS}...`;
 
+    // Get selected timer value
+    const timerSelect = document.getElementById('timerSelect');
+    const countdownSeconds = timerSelect ? parseInt(timerSelect.value, 10) : COUNTDOWN_SECONDS;
+
     // Countdown
-    await showCountdown(COUNTDOWN_SECONDS);
+    await showCountdown(countdownSeconds);
+
+    // Play shutter sound
+    const shutterSound = document.getElementById('shutterSound');
+    if (shutterSound) {
+      shutterSound.currentTime = 0;
+      shutterSound.play().catch(e => console.log('Audio play prevented:', e));
+    }
 
     // Capture
     const photoDataUrl = capturePhoto();
@@ -369,6 +419,10 @@ async function startCapture() {
 
     // Update preview
     updatePreviewSlot(i, photoDataUrl);
+    
+    // Hide retake button while sequence is still running
+    const retakeBtn = document.querySelector(`#prev${i} .retake-btn`);
+    if (retakeBtn) retakeBtn.style.display = 'none';
 
     $captureStatus.textContent = `Photo ${i + 1} captured!`;
 
@@ -380,9 +434,12 @@ async function startCapture() {
 
   // All photos captured
   $captureStatus.textContent = 'All photos captured! You can proceed.';
-  $btnCapture.textContent = 'Retake Photos';
+  $btnCapture.textContent = 'Retake All Photos';
   $btnCapture.disabled = false;
   $btnProceed.classList.remove('hidden');
+  
+  // Show all retake buttons now that sequence is done
+  document.querySelectorAll('.retake-btn').forEach(btn => btn.style.display = 'flex');
 
   // Stop camera to free resources
   stopCamera();
@@ -397,11 +454,21 @@ function showCountdown(seconds) {
     let remaining = seconds;
     $countdown.classList.remove('hidden');
     $countdown.textContent = remaining;
+    
+    const beepSound = document.getElementById('beepSound');
+    if (beepSound) {
+      beepSound.currentTime = 0;
+      beepSound.play().catch(e => console.log('Audio play prevented:', e));
+    }
 
     const interval = setInterval(() => {
       remaining--;
       if (remaining > 0) {
         $countdown.textContent = remaining;
+        if (beepSound) {
+          beepSound.currentTime = 0;
+          beepSound.play().catch(e => console.log('Audio play prevented:', e));
+        }
       } else {
         clearInterval(interval);
         $countdown.classList.add('hidden');
@@ -430,10 +497,12 @@ function capturePhoto() {
 
   const ctx = $captureCanvas.getContext('2d');
 
-  // Draw mirrored to match the live preview
+  // Draw mirrored to match the live preview if using front camera
   ctx.save();
-  ctx.translate(vw, 0);
-  ctx.scale(-1, 1);
+  if (currentFacingMode === 'user') {
+    ctx.translate(vw, 0);
+    ctx.scale(-1, 1);
+  }
   ctx.drawImage($cameraFeed, 0, 0, vw, vh);
   ctx.restore();
 
@@ -456,8 +525,61 @@ function triggerFlash() {
  */
 function updatePreviewSlot(index, dataUrl) {
   const slot = document.getElementById(`prev${index}`);
-  slot.innerHTML = `<img src="${dataUrl}" alt="Photo ${index + 1}" />`;
+  slot.innerHTML = `
+    <img src="${dataUrl}" alt="Photo ${index + 1}" style="width: 100%; height: 100%; object-fit: cover;" />
+    <button class="retake-btn absolute bottom-1 right-1 bg-slate-900/70 text-white p-1 sm:p-1.5 rounded-md sm:rounded-lg hover:bg-slate-900 transition-colors flex items-center justify-center" onclick="retakeSinglePhoto(${index})" title="Retake this photo">
+      <iconify-icon icon="solar:camera-rotate-linear" class="text-sm sm:text-base pointer-events-none"></iconify-icon>
+    </button>
+  `;
   slot.classList.add('filled');
+}
+
+/**
+ * Retake a single photo at the specified index.
+ */
+async function retakeSinglePhoto(index) {
+  if (!cameraStream || !$cameraFeed.srcObject) {
+    await initCamera(true);
+  }
+  await waitForVideoReady();
+
+  $btnCapture.disabled = true;
+  $btnProceed.classList.add('hidden');
+  
+  // Hide retake buttons during capture
+  document.querySelectorAll('.retake-btn').forEach(btn => btn.style.display = 'none');
+
+  $captureStatus.textContent = `Retaking photo ${index + 1}...`;
+
+  const timerSelect = document.getElementById('timerSelect');
+  const countdownSeconds = timerSelect ? parseInt(timerSelect.value, 10) : COUNTDOWN_SECONDS;
+
+  await showCountdown(countdownSeconds);
+
+  const shutterSound = document.getElementById('shutterSound');
+  if (shutterSound) {
+    shutterSound.currentTime = 0;
+    shutterSound.play().catch(e => console.log('Audio play prevented:', e));
+  }
+
+  const photoDataUrl = capturePhoto();
+  capturedPhotos[index] = photoDataUrl;
+
+  triggerFlash();
+  updatePreviewSlot(index, photoDataUrl);
+
+  $captureStatus.textContent = `Photo ${index + 1} retaken!`;
+
+  $btnCapture.disabled = false;
+  if (capturedPhotos.length === TOTAL_PHOTOS && !capturedPhotos.includes(undefined)) {
+    $btnProceed.classList.remove('hidden');
+  }
+  
+  // Show all retake buttons again
+  document.querySelectorAll('.retake-btn').forEach(btn => btn.style.display = 'flex');
+  
+  // Stop camera again to free resources
+  stopCamera();
 }
 
 /**
@@ -561,7 +683,33 @@ async function renderAdjustCards() {
   await prepareCalibrationDefaults();
   renderCalibrationControls();
   updateCalibrationHint();
+  setupFilterButtons();
   await renderAdjustPreview();
+}
+
+/**
+ * Setup event listeners for global photo filter buttons.
+ */
+function setupFilterButtons() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+      filterBtns.forEach(b => b.classList.add('bg-gray-200', 'text-gray-800'));
+      
+      e.target.classList.remove('bg-gray-200', 'text-gray-800');
+      e.target.classList.add('bg-blue-600', 'text-white');
+
+      // Update global filter state
+      globalFilter = e.target.dataset.filter;
+      
+      // Re-render preview
+      await renderAdjustPreview();
+    });
+  });
 }
 
 /**
@@ -692,9 +840,9 @@ async function prepareCalibrationDefaults() {
     const y0 = Math.round((th - (slotH * 3 + gap * 2)) / 2);
 
     slotConfig = [
-      { x, y: y0, w: slotW, h: slotH },
-      { x, y: y0 + slotH + gap, w: slotW, h: slotH },
-      { x, y: y0 + (slotH + gap) * 2, w: slotW, h: slotH },
+      { x, y: y0, w: slotW, h: slotH, tilt: 0 },
+      { x, y: y0 + slotH + gap, w: slotW, h: slotH, tilt: 0 },
+      { x, y: y0 + (slotH + gap) * 2, w: slotW, h: slotH, tilt: 0 },
     ];
   }
 
@@ -712,9 +860,9 @@ function buildFallbackSlotConfig(templateW, templateH) {
   const y0 = Math.round((templateH - (slotH * 3 + gap * 2)) / 2);
 
   return [
-    { x, y: y0, w: slotW, h: slotH },
-    { x, y: y0 + slotH + gap, w: slotW, h: slotH },
-    { x, y: y0 + (slotH + gap) * 2, w: slotW, h: slotH },
+    { x, y: y0, w: slotW, h: slotH, tilt: 0 },
+    { x, y: y0 + slotH + gap, w: slotW, h: slotH, tilt: 0 },
+    { x, y: y0 + (slotH + gap) * 2, w: slotW, h: slotH, tilt: 0 },
   ];
 }
 
@@ -727,7 +875,8 @@ function normalizeSlotConfig(templateW, templateH) {
     const safeH = Math.max(20, Math.min(Math.round(slot.h), templateH));
     const safeX = Math.max(0, Math.min(Math.round(slot.x), templateW - safeW));
     const safeY = Math.max(0, Math.min(Math.round(slot.y), templateH - safeH));
-    return { x: safeX, y: safeY, w: safeW, h: safeH };
+    const safeTilt = slot.tilt || 0;
+    return { x: safeX, y: safeY, w: safeW, h: safeH, tilt: safeTilt };
   });
 }
 
@@ -745,6 +894,7 @@ function renderCalibrationControls() {
     { key: 'y', label: 'Y', min: 0, max: templateH, step: 1 },
     { key: 'w', label: 'Width', min: 20, max: templateW, step: 1 },
     { key: 'h', label: 'Height', min: 20, max: templateH, step: 1 },
+    { key: 'tilt', label: 'Tilt (°)', min: -45, max: 45, step: 0.5 },
   ];
 
   $calibrationControls.innerHTML = '';
@@ -753,6 +903,9 @@ function renderCalibrationControls() {
     fields.forEach((field) => {
       const wrap = document.createElement('div');
       wrap.className = 'cal-item';
+      const unit = field.key === 'tilt' ? '°' : 'px';
+      const displayVal = field.key === 'tilt' ? slot[field.key] : Math.round(slot[field.key]);
+
       wrap.innerHTML = `
         <label>Slot ${slotIndex + 1} — ${field.label}</label>
         <input
@@ -764,7 +917,7 @@ function renderCalibrationControls() {
           data-slot="${slotIndex}"
           data-key="${field.key}"
         />
-        <div class="cal-val" id="calVal-${slotIndex}-${field.key}">${Math.round(slot[field.key])} px</div>
+        <div class="cal-val" id="calVal-${slotIndex}-${field.key}">${displayVal} ${unit}</div>
       `;
 
       const input = wrap.querySelector('input');
@@ -773,7 +926,10 @@ function renderCalibrationControls() {
         const key = event.target.dataset.key;
         slotConfig[idx][key] = parseFloat(event.target.value);
         normalizeSlotConfig(templateW, templateH);
-        document.getElementById(`calVal-${idx}-${key}`).textContent = `${Math.round(slotConfig[idx][key])} px`;
+        
+        const newDisplayVal = key === 'tilt' ? slotConfig[idx][key] : Math.round(slotConfig[idx][key]);
+        document.getElementById(`calVal-${idx}-${key}`).textContent = `${newDisplayVal} ${unit}`;
+        
         saveCurrentSlotConfigForTemplate();
         await renderAdjustPreview();
       });
@@ -785,35 +941,7 @@ function renderCalibrationControls() {
 
 function updateCalibrationHint() {
   if (!$calibrationHint) return;
-
-  if (!isClickCalibrating) {
-    $calibrationHint.textContent = 'Tip: klik "Calibrate by Click" lalu tandai kiri-atas dan kanan-bawah untuk tiap slot.';
-    return;
-  }
-
-  const slotIndex = Math.floor(clickCalibrationStep / 2) + 1;
-  const pointLabel = clickCalibrationStep % 2 === 0 ? 'kiri-atas' : 'kanan-bawah';
-  $calibrationHint.textContent = `Mode klik aktif: pilih titik ${pointLabel} untuk Slot ${slotIndex}.`;
-}
-
-function startClickCalibration() {
-  isClickCalibrating = true;
-  clickCalibrationStep = 0;
-  clickStartPoint = null;
-  updateCalibrationHint();
-}
-
-function stopClickCalibration() {
-  isClickCalibrating = false;
-  clickCalibrationStep = 0;
-  clickStartPoint = null;
-  updateCalibrationHint();
-}
-
-if ($btnCalibrateClick) {
-  $btnCalibrateClick.addEventListener('click', () => {
-    startClickCalibration();
-  });
+  $calibrationHint.textContent = 'Tip: Gunakan slider di atas untuk menyesuaikan posisi, ukuran, dan kemiringan foto agar pas dengan frame.';
 }
 
 if ($btnResetTemplateSlot) {
@@ -833,21 +961,6 @@ if ($btnResetTemplateSlot) {
     normalizeSlotConfig(templateImageCache?.naturalWidth || 600, templateImageCache?.naturalHeight || 1500);
     renderCalibrationControls();
     await renderAdjustPreview();
-    stopClickCalibration();
-  });
-}
-
-if ($btnCopySlotConfig) {
-  $btnCopySlotConfig.addEventListener('click', async () => {
-    const json = `const slotConfig = ${JSON.stringify(slotConfig, null, 2)};`;
-
-    try {
-      await navigator.clipboard.writeText(json);
-      alert('slotConfig berhasil dicopy.');
-    } catch {
-      alert('Gagal copy otomatis. Cek console untuk slotConfig.');
-      console.log(json);
-    }
   });
 }
 
@@ -884,63 +997,28 @@ async function renderAdjustPreview() {
   ctx.save();
   ctx.lineWidth = Math.max(2, Math.round(pw * 0.004));
   slotConfig.forEach((slot, idx) => {
+    ctx.save();
+    const cx = slot.x + slot.w / 2;
+    const cy = slot.y + slot.h / 2;
+    ctx.translate(cx, cy);
+    if (slot.tilt) {
+      ctx.rotate((slot.tilt * Math.PI) / 180);
+    }
+
     ctx.strokeStyle = '#ffcc00';
-    ctx.strokeRect(slot.x, slot.y, slot.w, slot.h);
+    ctx.strokeRect(-slot.w / 2, -slot.h / 2, slot.w, slot.h);
+    
+    const labelY = Math.max(-slot.h / 2 - 28, -cy);
     ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-    ctx.fillRect(slot.x, Math.max(0, slot.y - 28), 74, 24);
+    ctx.fillRect(-slot.w / 2, labelY, 74, 24);
     ctx.fillStyle = '#fff';
     ctx.font = `${Math.max(12, Math.round(pw * 0.025))}px sans-serif`;
-    ctx.fillText(`Slot ${idx + 1}`, slot.x + 8, Math.max(16, slot.y - 10));
+    ctx.fillText(`Slot ${idx + 1}`, -slot.w / 2 + 8, labelY + 16);
+    
+    ctx.restore();
   });
   ctx.restore();
 }
-
-if ($adjustPreviewCanvas) {
-  $adjustPreviewCanvas.addEventListener('click', async (event) => {
-    if (!isClickCalibrating || !templateImageCache) return;
-
-    const rect = $adjustPreviewCanvas.getBoundingClientRect();
-    const scaleX = $adjustPreviewCanvas.width / rect.width;
-    const scaleY = $adjustPreviewCanvas.height / rect.height;
-    const x = Math.round((event.clientX - rect.left) * scaleX);
-    const y = Math.round((event.clientY - rect.top) * scaleY);
-
-    const currentSlotIndex = Math.floor(clickCalibrationStep / 2);
-    if (currentSlotIndex >= TOTAL_PHOTOS) {
-      stopClickCalibration();
-      return;
-    }
-
-    if (clickCalibrationStep % 2 === 0) {
-      clickStartPoint = { x, y };
-      slotConfig[currentSlotIndex].x = x;
-      slotConfig[currentSlotIndex].y = y;
-    } else {
-      const start = clickStartPoint || { x, y };
-      const left = Math.min(start.x, x);
-      const top = Math.min(start.y, y);
-      const width = Math.max(20, Math.abs(x - start.x));
-      const height = Math.max(20, Math.abs(y - start.y));
-      slotConfig[currentSlotIndex] = { x: left, y: top, w: width, h: height };
-      clickStartPoint = null;
-    }
-
-    normalizeSlotConfig(templateImageCache.naturalWidth, templateImageCache.naturalHeight);
-    renderCalibrationControls();
-    saveCurrentSlotConfigForTemplate();
-
-    clickCalibrationStep++;
-    if (clickCalibrationStep >= TOTAL_PHOTOS * 2) {
-      stopClickCalibration();
-      alert('Kalibrasi klik selesai dan tersimpan untuk template ini.');
-    } else {
-      updateCalibrationHint();
-    }
-
-    await renderAdjustPreview();
-  });
-}
-
 
 // ============================================
 // SECTION 5: GENERATE PHOTOSTRIP
@@ -961,7 +1039,11 @@ $btnGenerate.addEventListener('click', async () => {
     }
 
     $btnGenerate.disabled = true;
-    $btnGenerate.textContent = 'Generating...';
+    document.getElementById('btnGenerateText').classList.add('hidden');
+    document.getElementById('btnGenerateLoading').classList.remove('hidden');
+
+    // Small delay to allow UI to update before heavy canvas operations
+    await delay(100);
 
     await generatePhotostrip();
     showSection($resultSection);
@@ -971,7 +1053,8 @@ $btnGenerate.addEventListener('click', async () => {
     alert(`Gagal generate photostrip: ${detail}`);
   } finally {
     $btnGenerate.disabled = false;
-    $btnGenerate.textContent = 'Generate Photostrip';
+    document.getElementById('btnGenerateText').classList.remove('hidden');
+    document.getElementById('btnGenerateLoading').classList.add('hidden');
   }
 });
 
@@ -1052,12 +1135,36 @@ function drawCenterCrop(ctx, img, slot, scale) {
   srcX = (imgW - srcW) / 2;
   srcY = (imgH - srcH) / 2;
 
-  // Draw cropped image into slot area
+  ctx.save();
+  
+  // Move to the center of the slot
+  const cx = slot.x + slot.w / 2;
+  const cy = slot.y + slot.h / 2;
+  ctx.translate(cx, cy);
+  
+  // Rotate if tilt is provided
+  if (slot.tilt) {
+    ctx.rotate((slot.tilt * Math.PI) / 180);
+  }
+  
+  // Apply global filter
+  if (globalFilter !== 'none') {
+    ctx.filter = globalFilter === 'grayscale' ? 'grayscale(100%)' : 'sepia(100%)';
+  } else {
+    ctx.filter = 'none';
+  }
+  
+  // Draw image centered at (0,0)
   ctx.drawImage(
     img,
     srcX, srcY, srcW, srcH,    // source crop
-    slot.x, slot.y, slot.w, slot.h  // destination on canvas
+    -slot.w / 2, -slot.h / 2, slot.w, slot.h  // destination on canvas
   );
+  
+  // Reset filter
+  ctx.filter = 'none';
+  
+  ctx.restore();
 }
 
 /**
@@ -1170,7 +1277,22 @@ $btnRestart.addEventListener('click', () => {
   cameraStream = null;
   capturedPhotos = [];
   zoomValues = [1, 1, 1];
+  globalFilter = 'none';
   $userName.value = '';
+
+  // Reset filter buttons UI
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  if (filterBtns.length) {
+    filterBtns.forEach(b => {
+      b.classList.remove('bg-blue-600', 'text-white');
+      b.classList.add('bg-gray-200', 'text-gray-800');
+    });
+    const defaultBtn = document.querySelector('.filter-btn[data-filter="none"]');
+    if (defaultBtn) {
+      defaultBtn.classList.remove('bg-gray-200', 'text-gray-800');
+      defaultBtn.classList.add('bg-blue-600', 'text-white');
+    }
+  }
 
   // Clear canvas
   const ctx = $resultCanvas.getContext('2d');
