@@ -8,33 +8,87 @@
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ff-red: #ff5959;
+      --ff-primary: #115959;
       --ff-yellow: #ffde61;
-      --ff-orange: #ffa23a;
+      --ff-green: #1fa23a;
       --ff-blue: #4875da;
       --ff-bg: #fffdf6;
-      --ff-text: #2f3767;
+      --ff-text: #115959;
       --ff-muted: #6673a0;
-      --ff-font-main: 'Poppins', sans-serif;
-      --ff-font-script: 'Kalam', cursive;
+      --ff-font-main: 'Nunito', sans-serif;
+      --ff-font-display: 'Fredoka', sans-serif;
     }
 
     body {
       font-family: var(--ff-font-main);
-      background: radial-gradient(circle at 10% -10%, #ffffff 0%, var(--ff-bg) 50%, #f8f4e8 100%);
+      background: var(--ff-bg);
       color: var(--ff-text);
+      background-image: radial-gradient(var(--ff-primary) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-color: var(--ff-bg);
     }
 
-    h1, h2, h3, button {
-      font-family: var(--ff-font-main);
+    h1, h2, h3, .font-display {
+      font-family: var(--ff-font-display);
     }
 
-    .font-script {
-      font-family: var(--ff-font-script);
-      letter-spacing: 0.01em;
+    /* Neo-brutalism / Playful Button Style */
+    .btn-playful {
+      background-color: var(--ff-primary);
+      color: white;
+      border: 3px solid var(--ff-primary);
+      border-radius: 9999px;
+      font-family: var(--ff-font-display);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 4px 4px 0px var(--ff-primary);
+      transition: all 0.15s ease;
+    }
+
+    .btn-playful:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--ff-primary);
+    }
+
+    .btn-playful:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px var(--ff-primary);
+    }
+
+    .btn-playful-yellow {
+      background-color: var(--ff-yellow);
+      color: var(--ff-primary);
+      border: 3px solid var(--ff-primary);
+      box-shadow: 4px 4px 0px var(--ff-primary);
+    }
+
+    .btn-playful-yellow:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--ff-primary);
+    }
+
+    .btn-playful-yellow:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px var(--ff-primary);
+    }
+
+    /* Playful Card Style */
+    .card-playful {
+      background: white;
+      border: 3px solid var(--ff-primary);
+      border-radius: 1.5rem;
+      box-shadow: 6px 6px 0px var(--ff-primary);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .card-playful:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px var(--ff-primary);
     }
 
     .section {
@@ -90,23 +144,23 @@
     }
 
     .template-card {
-      background: #fff;
-      border-radius: 1rem;
-      border: 2px solid #e8edf7;
-      box-shadow: 0 2px 10px rgba(20, 35, 75, 0.06);
+      background: white;
+      border: 3px solid var(--ff-primary);
+      border-radius: 1.5rem;
+      box-shadow: 4px 4px 0px var(--ff-primary);
       overflow: hidden;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .template-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(20, 35, 75, 0.12);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--ff-primary);
     }
 
     .template-card.selected {
-      border-color: var(--ff-blue);
-      box-shadow: 0 0 0 3px rgba(72, 117, 218, 0.16);
+      border-color: var(--ff-green);
+      box-shadow: 0 0 0 4px var(--ff-green), 6px 6px 0px var(--ff-primary);
     }
 
     .template-card img {
@@ -114,45 +168,58 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      border-bottom: 3px solid var(--ff-primary);
     }
 
     .template-label {
-      font-size: 0.75rem;
-      color: var(--ff-muted);
-      padding: 0.4rem 0.5rem;
+      font-size: 0.85rem;
+      color: var(--ff-primary);
+      padding: 0.6rem 0.5rem;
       text-align: center;
-      border-top: 1px solid #eef2f9;
-      background: #fafcff;
+      background: var(--ff-yellow);
+      font-family: var(--ff-font-display);
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .preview-slot {
+      border: 3px dashed var(--ff-primary) !important;
+      border-radius: 1rem !important;
+      background: white !important;
+      transition: all 0.2s ease;
     }
 
     .preview-slot.filled {
-      border-color: var(--ff-blue) !important;
-      color: var(--ff-blue) !important;
+      border: 3px solid var(--ff-primary) !important;
+      box-shadow: 4px 4px 0px var(--ff-primary);
     }
 
     .preview-slot.filled img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 0.75rem;
     }
 
     .adjust-card {
-      background: #fbfdff;
-      border: 1px solid #e5edf8;
-      border-radius: 1rem;
-      padding: 0.9rem;
+      background: white;
+      border: 3px solid var(--ff-primary);
+      border-radius: 1.5rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      box-shadow: 4px 4px 0px var(--ff-primary);
     }
 
     .adjust-card .thumb-wrapper {
       width: 100%;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      border-radius: 0.75rem;
-      background: #eff4fb;
+      border-radius: 1rem;
+      border: 3px solid var(--ff-primary);
+      background: var(--ff-yellow);
     }
 
     .adjust-card .thumb-wrapper img {
@@ -179,14 +246,14 @@
     #btnStart,
     #btnCapture,
     #btnGenerate {
-      background: var(--ff-blue) !important;
-      box-shadow: 0 8px 24px rgba(72, 117, 218, 0.28) !important;
+      background: var(--ff-primary) !important;
+      box-shadow: 0 8px 24px rgba(17, 89, 89, 0.28) !important;
     }
 
     #btnStart:hover,
     #btnCapture:hover,
     #btnGenerate:hover {
-      background: #3f66c3 !important;
+      background: #0d4545 !important;
     }
 
     .theme-soft {
@@ -245,104 +312,142 @@
   <!-- ======================== -->
   <!-- SECTION 1: LANDING       -->
   <!-- ======================== -->
-  <section id="landing" class="section active flex-1">
-    <div class="max-w-5xl mx-auto px-4 py-12 sm:py-24 w-full flex flex-col gap-16">
+  <section id="landing" class="section active flex-1 bg-[var(--ff-bg)]">
+    
+    <!-- Top Announcement Bar -->
+    <div class="w-full bg-[var(--ff-primary)] text-white text-center py-2 text-xs font-display font-bold tracking-wider uppercase border-b-4 border-[var(--ff-primary)]">
+      ✨ FREE DIGITAL PHOTOSTRIP GENERATOR ✨
+    </div>
 
-      <header class="hero-palette-top bg-white rounded-[2.5rem] p-8 sm:p-12 shadow-[0_8px_40px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col md:flex-row gap-12 items-center relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+    <!-- Navbar -->
+    <nav class="w-full bg-white px-6 py-4 flex items-center justify-between border-b-4 border-[var(--ff-primary)] relative z-10">
+      <!-- Left Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-display font-bold uppercase tracking-wide text-[var(--ff-primary)] w-1/3">
+        <a href="#" class="hover:text-[var(--ff-green)] transition-colors hover:-translate-y-1 inline-block">Home</a>
+        <a href="#templateSelection" class="hover:text-[var(--ff-green)] transition-colors hover:-translate-y-1 inline-block">Templates</a>
+        <a href="#" class="hover:text-[var(--ff-green)] transition-colors hover:-translate-y-1 inline-block">About</a>
+      </div>
+      
+      <!-- Center Logo -->
+      <div class="flex-1 md:flex-none flex justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <img src="assets/logonobg.png" alt="FloFrame Logo" class="h-28 sm:h-36 object-contain hover:scale-105 transition-transform duration-300" onerror="this.src='assets/logo.png'" />
+      </div>
 
-        <div class="w-full md:w-1/2 flex flex-col z-10">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="flex items-center justify-center w-10 h-10 text-white rounded-xl font-semibold tracking-tighter text-lg shadow-sm" style="background: var(--ff-blue)">
-              FF
-            </div>
-            <span class="text-xs font-medium theme-soft py-1.5 px-3 rounded-full border font-script">Digital Photobooth</span>
+      <!-- Right Links -->
+      <div class="hidden md:flex items-center justify-end gap-8 text-sm font-display font-bold uppercase tracking-wide text-[var(--ff-primary)] w-1/3">
+        <a href="#" class="hover:text-[var(--ff-green)] transition-colors hover:-translate-y-1 inline-block">Contact</a>
+        <button class="hover:text-[var(--ff-green)] transition-colors hover:-translate-y-1 inline-block">
+          <iconify-icon icon="solar:user-bold-duotone" width="1.8em"></iconify-icon>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="w-full bg-[var(--ff-yellow)] px-4 py-16 sm:py-24 border-b-4 border-[var(--ff-primary)] relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute top-10 left-10 text-[var(--ff-primary)] opacity-20 animate-bounce" style="animation-duration: 3s;">
+        <iconify-icon icon="solar:star-fall-bold-duotone" width="4em"></iconify-icon>
+      </div>
+      <div class="absolute bottom-10 right-10 text-[var(--ff-primary)] opacity-20 animate-bounce" style="animation-duration: 4s;">
+        <iconify-icon icon="solar:camera-bold-duotone" width="5em"></iconify-icon>
+      </div>
+
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
+        <!-- Left Content -->
+        <div class="w-full md:w-1/2 flex flex-col items-start text-left">
+          <div class="inline-block bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold px-4 py-1 rounded-full text-sm mb-6 shadow-[4px_4px_0px_#115959] rotate-[-2deg]">
+            📸 Snap, Edit, Print!
           </div>
-
-          <h1 class="text-4xl sm:text-5xl font-semibold tracking-tighter text-slate-900 leading-[1.1] mb-5">
-            Build your photostrip in under a minute.
+          <h1 class="text-5xl sm:text-7xl font-display font-black uppercase tracking-tight text-[var(--ff-primary)] leading-[1.1] mb-6 drop-shadow-[4px_4px_0px_white]">
+            BUILD<br/>YOUR<br/>PHOTOSTRIP
           </h1>
-          <p class="text-sm sm:text-base text-slate-500 leading-relaxed mb-8 max-w-md">
+          <p class="text-base sm:text-lg text-[var(--ff-primary)] font-bold mb-8 max-w-md bg-white/50 p-4 rounded-2xl border-2 border-[var(--ff-primary)]">
             Pilih template, ambil 3 foto, atur framing, lalu download hasil PNG berkualitas langsung dari browser.
           </p>
-
-          <div class="flex items-center gap-4">
-            <button id="btnStart" class="text-white px-7 py-3.5 rounded-full text-sm font-medium transition-all active:scale-95 flex items-center gap-2 shadow-md">
-              Start Photobooth
-              <iconify-icon icon="solar:arrow-right-linear" width="1.2em" height="1.2em"></iconify-icon>
-            </button>
-          </div>
-
-          <div class="flex flex-wrap gap-x-6 gap-y-3 mt-10 text-xs text-slate-500 font-medium">
-            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:server-linear"></iconify-icon> Static Hosting Ready</span>
-            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:smartphone-linear"></iconify-icon> Mobile First</span>
-            <span class="flex items-center gap-1.5"><iconify-icon icon="solar:cloud-download-linear"></iconify-icon> No App Install</span>
-          </div>
+          <button id="btnStart" class="btn-playful px-10 py-5 text-lg flex items-center gap-3 group">
+            Start Photobooth
+            <iconify-icon icon="solar:arrow-right-bold-duotone" class="group-hover:translate-x-2 transition-transform"></iconify-icon>
+          </button>
         </div>
 
-        <div class="w-full md:w-1/2 relative z-10">
-          <div class="aspect-[4/5] bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-sm relative group">
-            <img src="assets/Poster.png" alt="FloFrame showcase" class="w-full h-full object-cover text-xs text-slate-400 flex items-center justify-center text-center bg-slate-100 transition-transform duration-700 group-hover:scale-105" />
-            <div class="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-3xl"></div>
-          </div>
+        <!-- Right Image -->
+        <div class="w-full md:w-1/2 flex justify-center relative">
+          <div class="absolute inset-0 bg-[var(--ff-green)] rounded-full blur-3xl opacity-20 animate-pulse"></div>
+          <img src="assets/Poster.png" alt="FloFrame showcase" class="w-[80%] max-w-md h-auto object-contain drop-shadow-[12px_12px_0px_#115959] rotate-3 hover:rotate-[-2deg] hover:scale-105 transition-all duration-300 relative z-10" />
         </div>
-      </header>
+      </div>
+    </div>
 
-      <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
-          <div class="w-10 h-10 theme-soft rounded-xl flex items-center justify-center mb-2">
-            <iconify-icon icon="solar:gallery-linear" width="1.5em" height="1.5em"></iconify-icon>
+    <!-- Features / Badges Row -->
+    <div class="w-full bg-white py-16 border-b-4 border-[var(--ff-primary)]">
+      <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12 justify-items-center">
+        <div class="flex flex-col items-center gap-4 group w-full">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--ff-yellow)] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-center justify-center text-4xl text-[var(--ff-primary)] group-hover:-translate-y-2 transition-transform">
+            <iconify-icon icon="solar:gallery-bold-duotone"></iconify-icon>
           </div>
-          <h3 class="text-base font-semibold tracking-tight text-slate-900">Template Based</h3>
-          <p class="text-sm text-slate-500 leading-relaxed">Gunakan berbagai template photostrip dengan style berbeda untuk setiap mood.</p>
-        </article>
-
-        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
-          <div class="w-10 h-10 badge-yellow rounded-xl flex items-center justify-center mb-2">
-            <iconify-icon icon="solar:camera-minimalistic-linear" width="1.5em" height="1.5em"></iconify-icon>
+          <span class="text-sm font-display font-bold uppercase tracking-wider text-[var(--ff-primary)] text-center">Templates</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 group w-full">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--ff-green)] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-center justify-center text-4xl text-white group-hover:-translate-y-2 transition-transform">
+            <iconify-icon icon="solar:camera-minimalistic-bold-duotone"></iconify-icon>
           </div>
-          <h3 class="text-base font-semibold tracking-tight text-slate-900">Smart Capture</h3>
-          <p class="text-sm text-slate-500 leading-relaxed">Countdown otomatis dan alur 3 foto membuat proses pengambilan lebih konsisten.</p>
-        </article>
-
-        <article class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-3 hover:-translate-y-1 transition-transform duration-300">
-          <div class="w-10 h-10 badge-orange rounded-xl flex items-center justify-center mb-2">
-            <iconify-icon icon="solar:bolt-linear" width="1.5em" height="1.5em"></iconify-icon>
+          <span class="text-sm font-display font-bold uppercase tracking-wider text-[var(--ff-primary)] text-center">Smart Capture</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 group w-full">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--ff-blue)] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-center justify-center text-4xl text-white group-hover:-translate-y-2 transition-transform">
+            <iconify-icon icon="solar:bolt-bold-duotone"></iconify-icon>
           </div>
-          <h3 class="text-base font-semibold tracking-tight text-slate-900">Instant Output</h3>
-          <p class="text-sm text-slate-500 leading-relaxed">Generate, download, lalu lanjut kirim via WhatsApp dalam satu alur sederhana.</p>
-        </article>
-      </section>
+          <span class="text-sm font-display font-bold uppercase tracking-wider text-[var(--ff-primary)] text-center">Instant Output</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 group w-full">
+          <div class="w-20 h-20 rounded-2xl bg-[#ff9b9b] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-center justify-center text-4xl text-[var(--ff-primary)] group-hover:-translate-y-2 transition-transform">
+            <iconify-icon icon="solar:cloud-download-bold-duotone"></iconify-icon>
+          </div>
+          <span class="text-sm font-display font-bold uppercase tracking-wider text-[var(--ff-primary)] text-center">No Install</span>
+        </div>
+      </div>
+    </div>
 
+    <!-- Additional Content -->
+    <div class="max-w-5xl mx-auto px-4 py-16 w-full">
       <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 col-span-1 md:col-span-2">
-          <div class="px-2 pt-2 flex items-center gap-2">
-            <h3 class="text-sm font-semibold tracking-tight text-slate-900">Product Preview</h3>
+        <article class="card-playful p-6 flex flex-col gap-4 col-span-1 md:col-span-2 bg-[#fffdf6]">
+          <div class="flex items-center gap-3 border-b-3 border-[var(--ff-primary)] pb-4">
+            <div class="w-10 h-10 rounded-full bg-[var(--ff-yellow)] border-3 border-[var(--ff-primary)] flex items-center justify-center text-[var(--ff-primary)]">
+              <iconify-icon icon="solar:play-bold-duotone"></iconify-icon>
+            </div>
+            <h3 class="text-xl font-display font-bold tracking-wide text-[var(--ff-primary)] uppercase">Product Preview</h3>
           </div>
-          <div class="w-full aspect-video bg-slate-100 rounded-2xl overflow-hidden relative">
+          <div class="w-full aspect-video bg-[var(--ff-primary)] rounded-2xl overflow-hidden relative border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959]">
             <video controls class="w-full h-full object-cover" preload="metadata">
               <source src="assets/konten.mp4" type="video/mp4" />
-              <div class="absolute inset-0 flex items-center justify-center text-xs text-slate-400">Video preview not available</div>
+              <div class="absolute inset-0 flex items-center justify-center text-xs text-white">Video preview not available</div>
             </video>
           </div>
         </article>
 
         <div class="flex flex-col gap-6">
-          <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 flex-1">
-            <div class="px-2 pt-2">
-              <h3 class="text-sm font-semibold tracking-tight text-slate-900">Brand Asset</h3>
+          <article class="card-playful p-6 flex flex-col gap-4 flex-1 bg-[#fffdf6]">
+            <div class="flex items-center gap-3 border-b-3 border-[var(--ff-primary)] pb-4">
+              <div class="w-8 h-8 rounded-full bg-[var(--ff-green)] border-3 border-[var(--ff-primary)] flex items-center justify-center text-white">
+                <iconify-icon icon="solar:star-bold-duotone"></iconify-icon>
+              </div>
+              <h3 class="text-lg font-display font-bold tracking-wide text-[var(--ff-primary)] uppercase">Brand Asset</h3>
             </div>
-            <div class="w-full flex-1 bg-slate-50 rounded-2xl overflow-hidden min-h-[120px] flex items-center justify-center">
-              <img src="assets/logo.png" alt="FloFrame logo" class="w-1/2 h-auto object-contain" />
+            <div class="w-full flex-1 bg-white rounded-2xl overflow-hidden min-h-[120px] flex items-center justify-center border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959]">
+              <img src="assets/logo.png" alt="FloFrame logo" class="w-2/3 h-auto object-contain hover:scale-110 transition-transform" />
             </div>
           </article>
 
-          <article class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col gap-4 flex-1">
-            <div class="px-2 pt-2">
-              <h3 class="text-sm font-semibold tracking-tight text-slate-900">Brand Canvas</h3>
+          <article class="card-playful p-6 flex flex-col gap-4 flex-1 bg-[#fffdf6]">
+            <div class="flex items-center gap-3 border-b-3 border-[var(--ff-primary)] pb-4">
+              <div class="w-8 h-8 rounded-full bg-[var(--ff-blue)] border-3 border-[var(--ff-primary)] flex items-center justify-center text-white">
+                <iconify-icon icon="solar:document-bold-duotone"></iconify-icon>
+              </div>
+              <h3 class="text-lg font-display font-bold tracking-wide text-[var(--ff-primary)] uppercase">Brand Canvas</h3>
             </div>
-            <div class="w-full flex-1 bg-slate-50 rounded-2xl overflow-hidden min-h-[120px]">
-              <img src="assets/BMC%20.png" alt="FloFrame BMC" class="w-full h-full object-cover text-xs text-transparent" />
+            <div class="w-full flex-1 bg-white rounded-2xl overflow-hidden min-h-[120px] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959]">
+              <img src="assets/BMC%20.png" alt="FloFrame BMC" class="w-full h-full object-cover hover:scale-105 transition-transform" />
             </div>
           </article>
         </div>
@@ -353,17 +458,17 @@
   <!-- ======================== -->
   <!-- SECTION 2: TEMPLATE SEL  -->
   <!-- ======================== -->
-  <section id="templateSelection" class="section flex-1">
-    <div class="max-w-4xl mx-auto px-4 py-16 sm:py-24 w-full flex flex-col gap-10">
-      <div class="text-center flex flex-col items-center gap-3">
-        <div class="w-12 h-12 theme-soft rounded-2xl flex items-center justify-center mb-2">
-          <iconify-icon icon="solar:widget-3-linear" width="1.5em" height="1.5em"></iconify-icon>
+  <section id="templateSelection" class="section flex-1 bg-[var(--ff-bg)]">
+    <div class="max-w-5xl mx-auto px-4 py-16 sm:py-24 w-full flex flex-col gap-12">
+      <div class="text-center flex flex-col items-center gap-4">
+        <div class="inline-block bg-[var(--ff-yellow)] border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold px-6 py-2 rounded-full text-sm shadow-[4px_4px_0px_#115959] rotate-[-2deg] mb-4">
+          Step 1 of 3
         </div>
-        <h2 class="text-3xl font-semibold tracking-tight text-slate-900">Choose Template</h2>
-        <p class="text-sm text-slate-500 max-w-sm">Pilih satu template desain untuk memulai sesi photostrip Anda.</p>
+        <h2 class="text-4xl sm:text-5xl font-display font-black tracking-tight text-[var(--ff-primary)] uppercase drop-shadow-[2px_2px_0px_white]">Choose Template</h2>
+        <p class="text-base font-bold text-[var(--ff-primary)] max-w-md bg-white/80 p-3 rounded-xl border-2 border-[var(--ff-primary)]">Pilih satu template desain untuk memulai sesi photostrip Anda.</p>
       </div>
 
-      <div id="templateGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+      <div id="templateGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8">
         <!-- Templates injected by JS -->
       </div>
     </div>
@@ -372,67 +477,71 @@
   <!-- ======================== -->
   <!-- SECTION 3: PHOTOBOOTH    -->
   <!-- ======================== -->
-  <section id="photobooth" class="section flex-1">
-    <div class="max-w-3xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
+  <section id="photobooth" class="section flex-1 bg-[var(--ff-bg)]">
+    <div class="max-w-4xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
 
-      <div class="text-center">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Photobooth Capture</h2>
-        <p class="text-sm text-slate-500 mt-2">Posisikan diri Anda, ambil 3 foto beruntun.</p>
+      <div class="text-center flex flex-col items-center gap-4">
+        <div class="inline-block bg-[var(--ff-green)] border-3 border-[var(--ff-primary)] text-white font-display font-bold px-6 py-2 rounded-full text-sm shadow-[4px_4px_0px_#115959] rotate-[2deg] mb-2">
+          Step 2 of 3
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-display font-black tracking-tight text-[var(--ff-primary)] uppercase drop-shadow-[2px_2px_0px_white]">Say Cheese!</h2>
+        <p class="text-base font-bold text-[var(--ff-primary)] max-w-md bg-white/80 p-3 rounded-xl border-2 border-[var(--ff-primary)]">Posisikan diri Anda, ambil 3 foto beruntun.</p>
       </div>
 
-      <div class="bg-white p-4 sm:p-6 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col gap-8">
+      <div class="card-playful p-6 sm:p-8 flex flex-col gap-8 bg-white">
 
-        <div class="relative w-full aspect-[3/4] sm:aspect-[4/3] bg-slate-900 rounded-[1.5rem] overflow-hidden shadow-inner flex items-center justify-center group">
+        <div class="relative w-full aspect-[3/4] sm:aspect-[4/3] bg-[var(--ff-primary)] rounded-2xl overflow-hidden border-4 border-[var(--ff-primary)] shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center group">
           <video id="cameraFeed" class="w-full h-full object-cover" autoplay playsinline></video>
 
-          <div id="countdown" class="countdown hidden absolute inset-0 flex items-center justify-center text-7xl font-semibold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] z-10"></div>
+          <div id="countdown" class="countdown hidden absolute inset-0 flex items-center justify-center text-8xl font-display font-black text-white drop-shadow-[4px_4px_0px_#115959] z-10"></div>
 
           <div id="flash" class="flash hidden absolute inset-0 bg-white z-20 transition-opacity duration-75"></div>
 
-          <div class="absolute inset-8 border border-white/20 rounded-xl pointer-events-none z-0"></div>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none z-0 flex items-center justify-center">
-            <iconify-icon icon="solar:target-linear"></iconify-icon>
+          <!-- Cute Camera Frame Overlay -->
+          <div class="absolute inset-4 border-4 border-dashed border-white/50 rounded-xl pointer-events-none z-0"></div>
+          <div class="absolute top-6 left-6 bg-[var(--ff-yellow)] text-[var(--ff-primary)] font-display font-bold px-3 py-1 rounded-full text-xs border-2 border-[var(--ff-primary)] rotate-[-5deg] z-10">
+            REC 🔴
           </div>
           
-          <button id="btnSwitchCamera" class="absolute top-4 right-4 bg-black/40 hover:bg-black/60 text-white p-2.5 rounded-full backdrop-blur-sm transition-colors z-30 flex items-center justify-center" title="Switch Camera">
-            <iconify-icon icon="solar:camera-rotate-linear" width="1.5em" height="1.5em"></iconify-icon>
+          <button id="btnSwitchCamera" class="absolute top-4 right-4 bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] p-3 rounded-full shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] transition-all z-30 flex items-center justify-center" title="Switch Camera">
+            <iconify-icon icon="solar:camera-rotate-bold-duotone" width="1.5em" height="1.5em"></iconify-icon>
           </button>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-2">
           <div class="flex flex-col items-center sm:items-start gap-4 flex-1">
-            <p id="captureStatus" class="capture-status-pill text-xs font-medium px-3 py-1.5 rounded-full border text-center sm:text-left">Ready to capture 3 photos</p>
+            <p id="captureStatus" class="bg-[var(--ff-yellow)] text-[var(--ff-primary)] font-display font-bold px-4 py-2 rounded-full border-2 border-[var(--ff-primary)] text-center sm:text-left shadow-[2px_2px_0px_#115959]">Ready to capture 3 photos</p>
             
             <div class="flex items-center gap-3 w-full sm:w-auto">
-              <button id="btnCapture" class="text-white px-8 py-4 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-all flex items-center gap-2 flex-1 sm:flex-none justify-center">
-                <iconify-icon icon="solar:camera-minimalistic-linear" width="1.4em" height="1.4em"></iconify-icon>
+              <button id="btnCapture" class="btn-playful px-8 py-4 text-sm flex items-center gap-2 flex-1 sm:flex-none justify-center">
+                <iconify-icon icon="solar:camera-minimalistic-bold-duotone" width="1.4em" height="1.4em"></iconify-icon>
                 Start Capture
               </button>
               
               <div class="relative">
-                <select id="timerSelect" class="appearance-none bg-slate-50 border border-slate-200 text-slate-700 text-sm font-medium rounded-full px-4 py-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer shadow-sm">
+                <select id="timerSelect" class="appearance-none bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold rounded-full px-5 py-4 pr-12 focus:outline-none cursor-pointer shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] transition-all">
                   <option value="3">3s</option>
                   <option value="5">5s</option>
                   <option value="10">10s</option>
                 </select>
-                <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-slate-400">
-                  <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon>
+                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-[var(--ff-primary)]">
+                  <iconify-icon icon="solar:alt-arrow-down-bold-duotone"></iconify-icon>
                 </div>
               </div>
             </div>
           </div>
 
           <div id="previewRow" class="flex gap-3 justify-center">
-            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev0"><span>1</span></div>
-            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev1"><span>2</span></div>
-            <div class="preview-slot w-14 h-20 sm:w-16 sm:h-24 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex items-center justify-center text-slate-300 font-medium text-sm overflow-hidden relative" id="prev2"><span>3</span></div>
+            <div class="preview-slot w-16 h-24 sm:w-20 sm:h-28 flex items-center justify-center text-[var(--ff-primary)] font-display font-bold text-xl overflow-hidden relative" id="prev0"><span>1</span></div>
+            <div class="preview-slot w-16 h-24 sm:w-20 sm:h-28 flex items-center justify-center text-[var(--ff-primary)] font-display font-bold text-xl overflow-hidden relative" id="prev1"><span>2</span></div>
+            <div class="preview-slot w-16 h-24 sm:w-20 sm:h-28 flex items-center justify-center text-[var(--ff-primary)] font-display font-bold text-xl overflow-hidden relative" id="prev2"><span>3</span></div>
           </div>
 
         </div>
 
-        <button id="btnProceed" class="hidden w-full bg-slate-900 text-white px-6 py-4 rounded-2xl text-sm font-medium hover:bg-slate-800 transition-all items-center justify-center gap-2 mt-2">
+        <button id="btnProceed" class="hidden w-full btn-playful-yellow px-6 py-5 text-lg flex items-center justify-center gap-3 mt-4 group">
           Continue to Adjust
-          <iconify-icon icon="solar:arrow-right-linear" width="1.2em" height="1.2em"></iconify-icon>
+          <iconify-icon icon="solar:arrow-right-bold-duotone" class="group-hover:translate-x-2 transition-transform"></iconify-icon>
         </button>
 
       </div>
@@ -442,69 +551,76 @@
   <!-- ======================== -->
   <!-- SECTION 4: ADJUST PHOTOS -->
   <!-- ======================== -->
-  <section id="adjustSection" class="section flex-1">
-    <div class="max-w-5xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
+  <section id="adjustSection" class="section flex-1 bg-[var(--ff-bg)]">
+    <div class="max-w-6xl mx-auto px-4 py-12 sm:py-16 w-full flex flex-col gap-8">
 
-      <div class="text-center">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Fine Tune & Calibrate</h2>
-        <p class="text-sm text-slate-500 mt-2">Atur zoom dan posisi agar hasil photostrip presisi.</p>
+      <div class="text-center flex flex-col items-center gap-4">
+        <div class="inline-block bg-[var(--ff-blue)] border-3 border-[var(--ff-primary)] text-white font-display font-bold px-6 py-2 rounded-full text-sm shadow-[4px_4px_0px_#115959] rotate-[-2deg] mb-2">
+          Step 3 of 3
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-display font-black tracking-tight text-[var(--ff-primary)] uppercase drop-shadow-[2px_2px_0px_white]">Fine Tune & Calibrate</h2>
+        <p class="text-base font-bold text-[var(--ff-primary)] max-w-md bg-white/80 p-3 rounded-xl border-2 border-[var(--ff-primary)]">Atur zoom dan posisi agar hasil photostrip presisi.</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
         <div class="lg:col-span-4 flex flex-col gap-4">
-          <div class="bg-white p-5 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col gap-4 h-full">
-              <h3 class="text-sm font-semibold tracking-tight flex items-center gap-2">
-                <iconify-icon icon="solar:tuning-square-2-linear" style="color: var(--ff-blue)"></iconify-icon>
+          <div class="card-playful p-6 flex flex-col gap-6 h-full bg-white">
+              <h3 class="text-xl font-display font-bold tracking-wide text-[var(--ff-primary)] uppercase flex items-center gap-3 border-b-3 border-[var(--ff-primary)] pb-4">
+                <div class="w-10 h-10 rounded-full bg-[var(--ff-yellow)] border-3 border-[var(--ff-primary)] flex items-center justify-center">
+                  <iconify-icon icon="solar:tuning-square-2-bold-duotone"></iconify-icon>
+                </div>
               Photo Adjustments
             </h3>
 
-            <div id="adjustCards" class="flex flex-col gap-4 overflow-y-auto pr-2">
+            <div id="adjustCards" class="flex flex-col gap-6 overflow-y-auto pr-2">
               <!-- JS inserts cards here -->
             </div>
 
-            <div class="mt-4 pt-4 border-t border-slate-100">
-              <h4 class="text-xs font-semibold text-slate-700 mb-3">Global Photo Filter</h4>
-              <div class="grid grid-cols-3 gap-2">
-                <button class="filter-btn bg-blue-600 text-white text-xs py-2 rounded-lg font-medium transition-colors" data-filter="none">Normal</button>
-                <button class="filter-btn bg-gray-200 text-gray-800 hover:bg-slate-200 text-xs py-2 rounded-lg font-medium transition-colors" data-filter="grayscale">B&W</button>
-                <button class="filter-btn bg-gray-200 text-gray-800 hover:bg-slate-200 text-xs py-2 rounded-lg font-medium transition-colors" data-filter="sepia">Sepia</button>
+            <div class="mt-4 pt-6 border-t-3 border-[var(--ff-primary)]">
+              <h4 class="text-sm font-display font-bold text-[var(--ff-primary)] uppercase mb-4">Global Photo Filter</h4>
+              <div class="grid grid-cols-3 gap-3">
+                <button class="filter-btn btn-playful py-3 text-xs" data-filter="none">Normal</button>
+                <button class="filter-btn bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold py-3 rounded-full text-xs shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] transition-all" data-filter="grayscale">B&W</button>
+                <button class="filter-btn bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold py-3 rounded-full text-xs shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] transition-all" data-filter="sepia">Sepia</button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="lg:col-span-8 flex flex-col gap-4">
-          <div class="bg-white p-5 sm:p-8 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col gap-6">
+          <div class="card-playful p-6 sm:p-8 flex flex-col gap-8 bg-white">
 
             <div>
-              <h3 class="text-base font-semibold tracking-tight text-slate-900 flex items-center gap-2">
-                <iconify-icon icon="solar:ruler-pen-linear" style="color: var(--ff-orange)"></iconify-icon>
+              <h3 class="text-xl font-display font-bold tracking-wide text-[var(--ff-primary)] uppercase flex items-center gap-3 border-b-3 border-[var(--ff-primary)] pb-4">
+                <div class="w-10 h-10 rounded-full bg-[var(--ff-green)] border-3 border-[var(--ff-primary)] flex items-center justify-center text-white">
+                  <iconify-icon icon="solar:ruler-pen-bold-duotone"></iconify-icon>
+                </div>
                 Slot Calibration
               </h3>
-              <p class="text-xs text-slate-500 mt-1">Geser nilai sampai foto pas di dalam frame template.</p>
+              <p class="text-sm font-bold text-[var(--ff-primary)] mt-4 bg-[var(--ff-yellow)] p-3 rounded-xl border-2 border-[var(--ff-primary)] inline-block">Geser nilai sampai foto pas di dalam frame template.</p>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex flex-col md:flex-row gap-8">
               <!-- Preview Canvas (Left side on desktop) -->
-              <div class="w-full md:w-1/2 bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center border border-slate-100 min-h-[300px] relative">
-                <canvas id="adjustPreviewCanvas" class="max-w-full h-auto max-h-[60vh] shadow-sm rounded-md bg-white"></canvas>
+              <div class="w-full md:w-1/2 bg-[var(--ff-bg)] rounded-2xl p-4 flex flex-col items-center justify-center border-3 border-[var(--ff-primary)] shadow-[inset_0_0_10px_rgba(0,0,0,0.1)] min-h-[300px] relative">
+                <canvas id="adjustPreviewCanvas" class="max-w-full h-auto max-h-[60vh] shadow-[4px_4px_0px_#115959] rounded-xl bg-white border-2 border-[var(--ff-primary)]"></canvas>
               </div>
 
               <!-- Sliders (Right side on desktop) -->
-              <div class="w-full md:w-1/2 flex flex-col gap-4">
-                <div id="calibrationControls" class="flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-2">
+              <div class="w-full md:w-1/2 flex flex-col gap-6">
+                <div id="calibrationControls" class="flex flex-col gap-4 max-h-[60vh] overflow-y-auto pr-2">
                   <!-- Slider controls injected by JS -->
                 </div>
 
-                <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100 mt-auto">
-                  <button id="btnResetTemplateSlot" class="w-full bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition-colors" type="button">
+                <div class="flex flex-wrap items-center gap-3 pt-6 border-t-3 border-[var(--ff-primary)] mt-auto">
+                  <button id="btnResetTemplateSlot" class="w-full bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-display font-bold px-4 py-3 rounded-full text-sm shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] transition-all" type="button">
                     Reset Template
                   </button>
                 </div>
 
-                <p id="calibrationHint" class="text-[10px] sm:text-xs text-slate-500 bg-blue-50/60 p-3 rounded-xl border border-blue-100/70 flex items-start gap-2">
-                  <iconify-icon icon="solar:info-circle-linear" class="mt-0.5 shrink-0" style="color: var(--ff-blue)"></iconify-icon>
+                <p id="calibrationHint" class="text-xs font-bold text-[var(--ff-primary)] bg-white p-4 rounded-xl border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-start gap-3">
+                  <iconify-icon icon="solar:info-circle-bold-duotone" class="mt-0.5 shrink-0 text-xl text-[var(--ff-blue)]"></iconify-icon>
                   <span>Tip: Gunakan slider di atas untuk menyesuaikan posisi, ukuran, dan kemiringan foto agar pas dengan frame.</span>
                 </p>
               </div>
@@ -512,12 +628,12 @@
 
           </div>
 
-          <button id="btnGenerate" class="w-full text-white py-4 rounded-2xl text-sm font-semibold hover:-translate-y-0.5 transition-all flex justify-center items-center gap-2 mt-2 relative overflow-hidden">
-            <span id="btnGenerateText" class="flex items-center gap-2">
+          <button id="btnGenerate" class="w-full btn-playful py-5 text-lg flex justify-center items-center gap-3 mt-4 relative overflow-hidden group">
+            <span id="btnGenerateText" class="flex items-center gap-3">
               Generate Photostrip
-              <iconify-icon icon="solar:magic-stick-3-linear" width="1.2em" height="1.2em"></iconify-icon>
+              <iconify-icon icon="solar:magic-stick-3-bold-duotone" class="group-hover:rotate-12 transition-transform"></iconify-icon>
             </span>
-            <span id="btnGenerateLoading" class="hidden absolute inset-0 flex items-center justify-center gap-2 bg-blue-700">
+            <span id="btnGenerateLoading" class="hidden absolute inset-0 flex items-center justify-center gap-3 bg-[var(--ff-primary)]">
               <iconify-icon icon="line-md:loading-twotone-loop" width="1.5em" height="1.5em"></iconify-icon>
               Generating...
             </span>
@@ -531,41 +647,41 @@
   <!-- ======================== -->
   <!-- SECTION 5: RESULT        -->
   <!-- ======================== -->
-  <section id="resultSection" class="section flex-1">
-    <div class="max-w-md mx-auto px-4 py-16 sm:py-20 w-full flex flex-col gap-8">
+  <section id="resultSection" class="section flex-1 bg-[var(--ff-bg)]">
+    <div class="max-w-md mx-auto px-4 py-16 sm:py-24 w-full flex flex-col gap-8">
 
-      <div class="text-center">
-        <div class="w-12 h-12 badge-red rounded-full flex items-center justify-center mx-auto mb-4">
-          <iconify-icon icon="solar:check-read-linear" width="1.5em" height="1.5em"></iconify-icon>
+      <div class="text-center flex flex-col items-center gap-4">
+        <div class="w-16 h-16 rounded-full bg-[var(--ff-green)] border-3 border-[var(--ff-primary)] shadow-[4px_4px_0px_#115959] flex items-center justify-center text-white text-3xl mb-2 animate-bounce">
+          <iconify-icon icon="solar:check-read-bold-duotone"></iconify-icon>
         </div>
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Final Photostrip</h2>
-        <p class="text-sm text-slate-500 mt-2">Download hasil atau lanjut chat WhatsApp.</p>
+        <h2 class="text-4xl sm:text-5xl font-display font-black tracking-tight text-[var(--ff-primary)] uppercase drop-shadow-[2px_2px_0px_white]">Ta-da! 🎉</h2>
+        <p class="text-base font-bold text-[var(--ff-primary)] max-w-md bg-white/80 p-3 rounded-xl border-2 border-[var(--ff-primary)]">Download hasil atau lanjut chat WhatsApp.</p>
       </div>
 
-      <div class="bg-white p-4 sm:p-5 rounded-[2rem] shadow-md border border-slate-100 flex flex-col items-center gap-6">
+      <div class="card-playful p-6 sm:p-8 flex flex-col items-center gap-8 bg-white">
 
-        <div class="w-full bg-slate-50 rounded-2xl p-4 flex justify-center items-center border border-slate-100">
-          <canvas id="resultCanvas" class="max-w-full h-auto max-h-[50vh] drop-shadow-sm"></canvas>
+        <div class="w-full bg-[var(--ff-bg)] rounded-2xl p-6 flex justify-center items-center border-3 border-[var(--ff-primary)] shadow-[inset_0_0_10px_rgba(0,0,0,0.1)]">
+          <canvas id="resultCanvas" class="max-w-full h-auto max-h-[50vh] shadow-[8px_8px_0px_#115959] border-2 border-[var(--ff-primary)] rounded-xl rotate-2 hover:rotate-0 transition-transform duration-300"></canvas>
         </div>
 
-        <div class="w-full flex flex-col gap-4">
-          <div class="flex flex-col gap-1.5">
-            <label for="userName" class="text-xs font-medium text-slate-500 ml-1">Your Name</label>
+        <div class="w-full flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <label for="userName" class="text-sm font-display font-bold text-[var(--ff-primary)] uppercase ml-2">Your Name</label>
             <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <iconify-icon icon="solar:user-linear"></iconify-icon>
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[var(--ff-primary)]">
+                <iconify-icon icon="solar:user-bold-duotone" width="1.2em"></iconify-icon>
               </div>
-              <input type="text" id="userName" placeholder="Enter your name..." class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300" />
+              <input type="text" id="userName" placeholder="Enter your name..." class="w-full bg-white border-3 border-[var(--ff-primary)] text-[var(--ff-primary)] font-bold text-base rounded-full pl-12 pr-4 py-4 focus:outline-none shadow-[4px_4px_0px_#115959] focus:shadow-[6px_6px_0px_#115959] focus:-translate-y-1 transition-all placeholder:text-[var(--ff-primary)]/50" />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-            <button id="btnDownload" class="bg-slate-900 text-white px-4 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-sm">
-              <iconify-icon icon="solar:download-minimalistic-linear" width="1.2em" height="1.2em"></iconify-icon>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+            <button id="btnDownload" class="btn-playful py-4 text-sm flex items-center justify-center gap-2">
+              <iconify-icon icon="solar:download-minimalistic-bold-duotone" width="1.4em"></iconify-icon>
               Download
             </button>
-            <button id="btnWhatsApp" class="bg-[#25D366] text-white px-4 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(37,211,102,0.25)] hover:bg-[#20bd5a] transition-colors">
-              <iconify-icon icon="solar:phone-calling-linear" width="1.2em" height="1.2em"></iconify-icon>
+            <button id="btnWhatsApp" class="bg-[#25D366] text-white border-3 border-[var(--ff-primary)] font-display font-bold uppercase tracking-wider py-4 rounded-full text-sm shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] transition-all flex items-center justify-center gap-2">
+              <iconify-icon icon="solar:phone-calling-bold-duotone" width="1.4em"></iconify-icon>
               WhatsApp
             </button>
           </div>
@@ -573,8 +689,8 @@
 
       </div>
 
-      <button id="btnRestart" class="text-sm text-slate-400 font-medium hover:text-slate-900 transition-colors py-2 flex items-center justify-center gap-2 mt-4 w-fit mx-auto">
-        <iconify-icon icon="solar:restart-linear"></iconify-icon>
+      <button id="btnRestart" class="text-sm font-display font-bold text-[var(--ff-primary)] uppercase hover:text-[var(--ff-green)] transition-colors py-3 px-6 bg-white border-3 border-[var(--ff-primary)] rounded-full shadow-[4px_4px_0px_#115959] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#115959] active:translate-y-1 active:shadow-[0px_0px_0px_#115959] flex items-center justify-center gap-2 mt-4 w-fit mx-auto">
+        <iconify-icon icon="solar:restart-bold-duotone" width="1.2em"></iconify-icon>
         Start Over
       </button>
 
