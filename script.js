@@ -23,6 +23,7 @@ const TEMPLATES = [
   { name: 'Frame 08 (Transparent)', src: 'templates/frame8.png' },
   { name: 'Frame 09 (Transparent)', src: 'templates/frame9.png' },
   { name: 'Frame 10 (Transparent)', src: 'templates/frame10.png' },
+  { name: 'Frame 11 (Transparent)', src: 'templates/frame11.png' },
 ];
 
 const TEMPLATE_TRANSPARENCY_HINTS = {
@@ -36,6 +37,7 @@ const TEMPLATE_TRANSPARENCY_HINTS = {
   'frame8.png': true,
   'frame9.png': true,
   'frame10.png': true,
+  'frame11.png': true,
 };
 
 /**
@@ -105,6 +107,11 @@ const TEMPLATE_SLOT_PRESETS = {
     { x: 85, y: 218, w: 456, h: 309, tilt: 0 },
     { x: 72, y: 608, w: 456, h: 285, tilt: 0 },
     { x: 121, y: 1030, w: 456, h: 327, tilt: 0 }
+  ],
+  'frame11.png': [
+    { x: 45, y: 73, w: 300, h: 300, tilt: 0 },
+    { x: 37, y: 363, w: 300, h: 300, tilt: 0 },
+    { x: 38, y: 700, w: 300, h: 300, tilt: 0 }
   ],
 };
 
